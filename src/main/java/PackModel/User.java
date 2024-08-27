@@ -13,6 +13,10 @@ public class User {
     private String email;
     private String telefone;
     
+    public User(){
+        
+    }
+    
     public User(String nome, String email, String telefone){
         this.nome = nome;
         this.email = email;
@@ -35,7 +39,7 @@ public class User {
         return this.email;
     }
     
-    public void setTetlefone(String telefone){
+    public void setTelefone(String telefone){
         this.telefone = telefone;
     }
     

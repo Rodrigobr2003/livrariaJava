@@ -1,5 +1,7 @@
 package com.mycompany.projeto_livraria;
 
+import PackModel.User;
+import PackServices.GerenciadorUsers;
 import java.util.*;
 
 public class Projeto_Livraria {
@@ -7,6 +9,8 @@ public class Projeto_Livraria {
     public static void main(String[] args) {
         
         Scanner scanner = new Scanner(System.in);
+        User usuario = new User();
+        GerenciadorUsers gerenciadorUsuarios = new GerenciadorUsers();
         
         System.out.println("Sistema de Gerenciamento de Biblioteca");
         
@@ -23,7 +27,16 @@ public class Projeto_Livraria {
         
         switch(scanner.nextInt()){
         case 1 -> {
-            System.out.println("Adicionar Usuario");
+            System.out.print("\nInsira o nome do usuario: ");
+            usuario.setNome(scanner.next());
+            
+            System.out.print("\nInsira o email do usuario: ");
+            usuario.setEmail(scanner.next());
+            
+            System.out.print("\nInsira o telefone do usuario: ");
+            usuario.setTelefone(scanner.next());
+            
+            gerenciadorUsuarios.adicionarUser(usuario);
             }
         case 2 -> {
             System.out.println("Adicionar Livro");
