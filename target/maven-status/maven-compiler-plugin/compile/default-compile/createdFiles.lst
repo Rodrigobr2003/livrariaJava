@@ -1,1 +1,7 @@
+PackModel\Livro.class
+PackModel\Emprestimo.class
 com\mycompany\projeto_livraria\Projeto_Livraria.class
+PackModel\User.class
+PackServices\GerenciadorEmprestimos.class
+PackServices\GerenciadorUsers.class
+PackServices\GerenciadorLivros.class
