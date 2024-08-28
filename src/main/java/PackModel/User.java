@@ -9,6 +9,7 @@ package PackModel;
  * @author Rodrigo
  */
 public class User {
+    private int ID;
     private String nome;
     private String email;
     private String telefone;
@@ -21,6 +22,14 @@ public class User {
         this.nome = nome;
         this.email = email;
         this.telefone = telefone;
+    }
+    
+    public void setID(int ID){
+        this.ID = ID;
+    }
+    
+    public int getID(){
+        return this.ID;
     }
     
     public void setNome(String nome){

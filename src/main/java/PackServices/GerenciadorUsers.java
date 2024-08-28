@@ -20,49 +20,49 @@ public class GerenciadorUsers {
     private Gson jsonObj;
     private FileWriter fileW;
     private FileReader fileR;
+    private File file;
     private String path = "C:\\Users\\Rodrigo\\Desktop\\users.json";
+    public int ultimoID = 0;
     
     ArrayList<User> listaUsuarios = new ArrayList<>() ;
 
     public GerenciadorUsers() {
-        this.jsonObj = new GsonBuilder().setPrettyPrinting().create();
+        jsonObj = new GsonBuilder().setPrettyPrinting().create();
+        
+        file = new File(path);
+        
+        if(file.exists()) this.getUsers();
         
         try{
             this.fileW = new FileWriter(path);
         }catch(IOException e){
             System.out.print("Erro ao criar arquivo usuarios.json");
         }
-        
-        try{
-            this.fileR = new FileReader(path);
-        }catch(FileNotFoundException e){
-            System.out.print("Erro ao achar arquivo usuarios.json");
-        }
-        
-        this.getUsers();
     }
     
     public void adicionarUser(User user){
         listaUsuarios.add(user);
     }
     
-    private ArrayList<User> getUsers(){
+    private void getUsers(){
         try{
-            Type listType = new TypeToken<ArrayList<User>>(){}.getType();
+            this.fileR = new FileReader(path);
+            
+            Type listType = new TypeToken<ArrayList<User>>() {}.getType();
             ArrayList<User> loadedUsers = jsonObj.fromJson(fileR, listType);
         
             if (loadedUsers != null) {
                     listaUsuarios = loadedUsers;
+                    ultimoID = loadedUsers.getLast().getID();
             }
-        
+            
             fileR.close();
             
+        }catch(FileNotFoundException e){
+            System.out.print("Arquivo nao encontrado");
         }catch(IOException e){
             System.out.println("Erro ao ler usuarios.json");
         }
-        
-        
-        return listaUsuarios;
     }
     
     public void fecharArquivo(){

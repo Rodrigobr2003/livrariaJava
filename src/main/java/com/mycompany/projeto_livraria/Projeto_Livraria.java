@@ -8,11 +8,12 @@ public class Projeto_Livraria {
 
     public static void main(String[] args) {
         
-        int escolha;
-        
         Scanner scanner = new Scanner(System.in);
         User usuario = new User();
         GerenciadorUsers gerenciadorUsuarios = new GerenciadorUsers();
+        
+        int escolha;
+        int counter = gerenciadorUsuarios.ultimoID;
         
         do{
             System.out.println("Sistema de Gerenciamento de Biblioteca");
@@ -30,6 +31,10 @@ public class Projeto_Livraria {
         
         switch(scanner.nextInt()){
         case 1 -> {
+            counter++;
+            
+            usuario.setID(counter);
+            
             System.out.print("\nInsira o nome do usuario: ");
             usuario.setNome(scanner.next());
             
@@ -63,7 +68,7 @@ public class Projeto_Livraria {
             System.out.println("Consulta de Livros");
         }
         case 9 -> {
-            System.exit(01);
+            System.exit(0);
         }
         
         }
