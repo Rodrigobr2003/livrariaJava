@@ -8,11 +8,14 @@ public class Projeto_Livraria {
 
     public static void main(String[] args) {
         
+        int escolha;
+        
         Scanner scanner = new Scanner(System.in);
         User usuario = new User();
         GerenciadorUsers gerenciadorUsuarios = new GerenciadorUsers();
         
-        System.out.println("Sistema de Gerenciamento de Biblioteca");
+        do{
+            System.out.println("Sistema de Gerenciamento de Biblioteca");
         
         System.out.println("1 - Adicionar Usuario");
         System.out.println("2 - Adicionar Livro");
@@ -59,8 +62,18 @@ public class Projeto_Livraria {
         case 8 -> {
             System.out.println("Consulta de Livros");
         }
+        case 9 -> {
+            System.exit(01);
+        }
         
         }
+        System.out.println("1 - Sair");
+        System.out.println("2 - Voltar ao menu");
+        escolha = scanner.nextInt();
+        
+        }while(escolha == 2);
+        
+        gerenciadorUsuarios.fecharArquivo();
         
     }
 }
