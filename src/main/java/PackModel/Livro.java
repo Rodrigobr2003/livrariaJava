@@ -48,7 +48,7 @@ public class Livro {
     public String getIsbn(){
         return this.isbn;
     }
-    
+
     public void setDataPublicacao(LocalDate dataPublicacao){
         this.dataPublicacao = dataPublicacao;
     }

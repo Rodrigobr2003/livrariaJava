@@ -50,10 +50,10 @@ public class GerenciadorUsers {
             
             Type listType = new TypeToken<ArrayList<User>>() {}.getType();
             ArrayList<User> loadedUsers = jsonObj.fromJson(fileR, listType);
-        
-            if (loadedUsers != null) {
-                    listaUsuarios = loadedUsers;
+            
+            if (!loadedUsers.isEmpty()) {
                     ultimoID = loadedUsers.getLast().getID();
+                    listaUsuarios = loadedUsers;
             }
             
             fileR.close();
