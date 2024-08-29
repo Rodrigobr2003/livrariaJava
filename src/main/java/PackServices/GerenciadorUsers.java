@@ -15,7 +15,7 @@ import com.google.gson.reflect.TypeToken;
  *
  * @author Rodrigo
  */
-public class GerenciadorUsers {
+public final class GerenciadorUsers {
     
     private Gson jsonObj;
     private FileWriter fileW;
@@ -38,6 +38,7 @@ public class GerenciadorUsers {
         }catch(IOException e){
             System.out.print("Erro ao criar arquivo usuarios.json");
         }
+        this.fecharArquivo();
     }
     
     public void adicionarUser(User user){

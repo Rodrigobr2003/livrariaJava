@@ -14,7 +14,7 @@ import java.util.*;
  *
  * @author Rodrigo
  */
-public class GerenciadorLivros {
+public final class GerenciadorLivros {
     
     private File file;
     private FileWriter fileW;
@@ -36,7 +36,7 @@ public class GerenciadorLivros {
         }catch(IOException e){
             System.out.println("Erro ao criar o arquivo...");
         }
-
+        this.fecharArquivo();
     }
     
     public void cadastrarLivro(Livro livro){
