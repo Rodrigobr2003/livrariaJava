@@ -5,24 +5,40 @@
 package PackModel;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 /**
  *
  * @author Rodrigo
  */
 public class Livro {
+    private int ID;
     private String titulo;
     private String autor;
+    private int quantidade;
     private String isbn;
-    private LocalDate dataPublicacao;
+//    private LocalDate dataPublicacao;
+    private String dataPublicacao;
     private boolean emprestado = false;
     
-    public Livro(String titulo, String autor, String isbn, LocalDate dataPublicacao){
+    public Livro(){
+        
+    }
+    
+    public Livro(String titulo, String autor, String isbn, String dataPublicacao){
         this.titulo = titulo;
         this.autor = autor;
         this.isbn = isbn;
         this.dataPublicacao = dataPublicacao;
         this.emprestado = false;
+    }
+    
+    public void setID(int ID){
+        this.ID = ID;
+    }
+    
+    public int getID(){
+        return this.ID;
     }
     
     public void setTitulo(String titulo){
@@ -41,6 +57,14 @@ public class Livro {
         return this.autor;
     }
     
+    public void setQuantidade(int quantidade){
+        this.quantidade = quantidade;
+    }
+    
+    public int getQuantidade(){
+        return this.quantidade;
+    }
+    
     public void setIsbn(String isbn){
         this.isbn = isbn;
     }
@@ -49,11 +73,12 @@ public class Livro {
         return this.isbn;
     }
 
-    public void setDataPublicacao(LocalDate dataPublicacao){
+    public void setDataPublicacao(String dataPublicacao){
+//        this.dataPublicacao = LocalDate.parse(dataPublicacao);
         this.dataPublicacao = dataPublicacao;
     }
     
-    public LocalDate getDataPublicacao(){
+    public String getDataPublicacao(){
         return this.dataPublicacao;
     }
     

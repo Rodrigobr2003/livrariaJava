@@ -1,6 +1,8 @@
 package com.mycompany.projeto_livraria;
 
+import PackModel.Livro;
 import PackModel.User;
+import PackServices.GerenciadorLivros;
 import PackServices.GerenciadorUsers;
 import java.util.*;
 
@@ -10,9 +12,11 @@ public class Projeto_Livraria {
         
         Scanner scanner = new Scanner(System.in);
         GerenciadorUsers gerenciadorUsuarios = new GerenciadorUsers();
+        GerenciadorLivros gerenciadorLivros = new GerenciadorLivros();
         
         int escolha;
-        int counter = gerenciadorUsuarios.ultimoID;
+        int counterUser = gerenciadorUsuarios.ultimoID;
+        int counterLivro = gerenciadorLivros.ultimoIDLivro;
         
         do{
         System.out.println("Sistema de Gerenciamento de Biblioteca");
@@ -32,9 +36,9 @@ public class Projeto_Livraria {
         case 1 -> {
             User usuario = new User();
             
-            counter++;
+            counterUser++;
             
-            usuario.setID(counter);
+            usuario.setID(counterUser);
             
             System.out.print("\nInsira o nome do usuario: ");
             usuario.setNome(scanner.next());
@@ -48,7 +52,28 @@ public class Projeto_Livraria {
             gerenciadorUsuarios.adicionarUser(usuario);
             }
         case 2 -> {
-            System.out.println("Adicionar Livro");
+            Livro livro = new Livro();
+            
+            counterLivro++;
+                    
+            livro.setID(counterLivro);
+            
+            System.out.print("\nInsira o titulo do livro: ");
+            livro.setTitulo(scanner.next());
+            
+            System.out.print("\nInsira o nome do autor do livro: ");
+            livro.setAutor(scanner.next());
+            
+            System.out.print("\nInsira a quantidade de livros: ");
+            livro.setQuantidade(scanner.nextInt());
+            
+            System.out.print("\nInsira o ISBN do livro: ");
+            livro.setIsbn(scanner.next());
+            
+            System.out.print("\nInsira a data de publicacao do livro: ");
+            livro.setDataPublicacao(scanner.next());
+            
+            gerenciadorLivros.cadastrarLivro(livro);
         }
         case 3 -> {
             System.out.println("Emprestar Livro");
@@ -80,6 +105,7 @@ public class Projeto_Livraria {
         }while(escolha == 2);
         
         gerenciadorUsuarios.fecharArquivo();
+        gerenciadorLivros.fecharArquivo();
         
     }
 }
