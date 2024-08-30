@@ -5,10 +5,11 @@
 package PackServices;
 
 import PackModel.Livro;
-import PackModel.User;
 import com.google.gson.*;
 import java.io.*;
 import java.util.*;
+import java.lang.reflect.Type;
+import com.google.gson.reflect.TypeToken;
 
 /**
  *
@@ -16,28 +17,36 @@ import java.util.*;
  */
 public abstract class ArquivoManager {
     
-    private File file;
+    protected File fileAM;
     private FileWriter fileW;
     private FileReader fileR;
     private final Gson jsonObj;
-    private String path;
+    protected String path;
+    private int ultimoID = 0;
     
-    public ArquivoManager(){
+    protected ArquivoManager(){
         this.jsonObj = new GsonBuilder().setPrettyPrinting().create();
+        
+        //Erro que tera que ser solucionado nos serviços
+//        if(this.fileAM.exists()) this.getDadosArquivo();
     }
     
     //Deve ser executado em todos os filhos antes de iniciar
-    private void criarArquivo(String nomeDoc){
-        this.path = System.getProperty("user.home"+"\\Desktop\\"+nomeDoc);
+    protected File criarArquivo(String nomeDoc){
+        
+        this.path = System.getProperty("user.home") + "\\Desktop\\" + nomeDoc;
         try{
-            this.file = new File(this.path);
-        }catch(Exception e){
+            this.fileAM = new File(this.path);
+            
+            //So esta criando o aqrv por conta disso
+            this.fileAM.createNewFile();
+        }catch(IOException e){
             System.out.println("Erro ao criar arquivo...");
         }
-        
+        return fileAM;
     }
     
-    private void escreverArquivo(){
+    protected void escreverArquivo(){
         try{
             this.fileW = new FileWriter(this.path);
         }catch(IOException e){
@@ -53,7 +62,8 @@ public abstract class ArquivoManager {
         }
     }
     
-    private <T> void fecharArquivo(ArrayList<T> lista){
+    //T age como um valor x, podendo ser User, Livro ou emprestimo
+     protected <T> void fecharArquivo(ArrayList<T> lista){
         try{
             jsonObj.toJson(lista, fileW);
             fileW.flush();
@@ -63,4 +73,18 @@ public abstract class ArquivoManager {
         }
     }
     
+    protected <T> ArrayList<T> getDadosArquivo(Class<T> classe, ArrayList<T> lista){
+        this.lerArquivo();  
+        
+        //cria um Type que corresponde a um ArrayList parametrizado pelo tipo passado por "classe"
+        Type tipoVariavel = TypeToken.getParameterized(ArrayList.class, classe).getType();
+        ArrayList<T> listaLoaded = jsonObj.fromJson(fileR, tipoVariavel);
+        
+        try{
+            this.fileR.close();    
+        }catch(IOException e){
+            System.out.println("Erro ao encerrar leitura...");
+        }
+        return listaLoaded;        
+    }
 }

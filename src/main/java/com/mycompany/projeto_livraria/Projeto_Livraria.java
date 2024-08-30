@@ -104,8 +104,8 @@ public class Projeto_Livraria {
         
         }while(escolha == 2);
         
-        gerenciadorUsuarios.fecharArquivo();
-        gerenciadorLivros.fecharArquivo();
+//        gerenciadorUsuarios.fecharArquivo();
+        gerenciadorLivros.chamarFechamento();
         
     }
 }

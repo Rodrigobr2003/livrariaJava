@@ -14,63 +14,40 @@ import java.util.*;
  *
  * @author Rodrigo
  */
-public final class GerenciadorLivros {
+public final class GerenciadorLivros extends ArquivoManager{
     
+    //TALVEZ SEJA NECESSÁRIO CADA ARQUIVO GERENCIADOR TER O SEUS IMPORTS
+    //DE FILES, ONDE O VALOR É ALOCADO POR MEIO DO ARQV. MANAGER
     private File file;
-    private FileWriter fileW;
-    private FileReader fileR;
-    private Gson jsonObj;
     private String path = System.getProperty("user.home")+"\\Desktop\\livros.json";
     private ArrayList<Livro> listaLivros = new ArrayList<>();
-    public int ultimoIDLivro;
+    private ArrayList<Livro> loadedLivros;
+    public int ultimoIDLivro = 0;
     
     public GerenciadorLivros(){
-        this.jsonObj = new GsonBuilder().setPrettyPrinting().create();
+        super();
         
-        this.file = new File(path);
+        this.file = criarArquivo("livros.json");
         
-        if(file.exists()) this.getLivros();
-        
-        try{
-            fileW = new FileWriter(path);
-        }catch(IOException e){
-            System.out.println("Erro ao criar o arquivo...");
+        if(file.exists()) this.loadedLivros = getDadosArquivo(Livro.class, listaLivros);
+
+        if (!loadedLivros.isEmpty()) {
+            this.ultimoIDLivro = loadedLivros.getLast().getID();
+            this.listaLivros = loadedLivros;
         }
-        this.fecharArquivo();
+        
+        escreverArquivo();
+        
+        fecharArquivo(this.listaLivros);
     }
     
     public void cadastrarLivro(Livro livro){
         this.listaLivros.add(livro);
+        
+        escreverArquivo();
     }
     
-    private void getLivros(){
-        try{
-            fileR = new FileReader(path);
-            
-            Type type = new TypeToken<ArrayList<Livro>>(){}.getType();
-            ArrayList<Livro> loadedLivros = jsonObj.fromJson(fileR, type);
-        
-            if(!loadedLivros.isEmpty()){
-                this.ultimoIDLivro = loadedLivros.getLast().getID();
-                listaLivros = loadedLivros;
-            }
-            
-            fileR.close();
-        }catch(FileNotFoundException e){
-            System.out.println("Arquivo não encontrado...");
-        }catch(IOException e){
-            System.out.println("Erro ao ler usuarios.json...");
-        }  
-    }
-    
-    public void fecharArquivo(){
-        try{
-            jsonObj.toJson(listaLivros, fileW);
-            fileW.flush();
-            fileW.close();
-        }catch(IOException e){
-            System.out.println("Erro ao fechar arquivo...");
-        }
-        
+    public void chamarFechamento(){
+        fecharArquivo(listaLivros);
     }
 }
