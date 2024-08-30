@@ -20,7 +20,7 @@ public final class GerenciadorLivros {
     private FileWriter fileW;
     private FileReader fileR;
     private Gson jsonObj;
-    private String path = "C:\\Users\\Rodrigo\\Desktop\\livros.json";
+    private String path = System.getProperty("user.home")+"\\Desktop\\livros.json";
     private ArrayList<Livro> listaLivros = new ArrayList<>();
     public int ultimoIDLivro;
     

@@ -16,12 +16,12 @@ import com.google.gson.reflect.TypeToken;
  * @author Rodrigo
  */
 public final class GerenciadorUsers {
-    
+
     private Gson jsonObj;
     private FileWriter fileW;
     private FileReader fileR;
     private File file;
-    private String path = "C:\\Users\\Rodrigo\\Desktop\\users.json";
+    private String path = System.getProperty("user.home")+"\\Desktop\\users.json";
     public int ultimoID = 0;
     
     ArrayList<User> listaUsuarios = new ArrayList<>() ;
