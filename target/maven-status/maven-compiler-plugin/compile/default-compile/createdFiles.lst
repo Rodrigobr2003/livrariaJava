@@ -5,5 +5,4 @@ com\mycompany\projeto_livraria\Projeto_Livraria.class
 PackModel\User.class
 PackServices\GerenciadorEmprestimos.class
 PackServices\GerenciadorUsers.class
-PackServices\GerenciadorUsers$1.class
 PackServices\GerenciadorLivros.class

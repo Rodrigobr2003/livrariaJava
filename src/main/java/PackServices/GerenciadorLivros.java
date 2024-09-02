@@ -39,7 +39,7 @@ public final class GerenciadorLivros extends ArquivoManager{
     
     public void cadastrarLivro(Livro livro){
         this.listaLivros.add(livro);
-        System.out.println(listaLivros);
+
     }
     
     public void chamarFechamento(){

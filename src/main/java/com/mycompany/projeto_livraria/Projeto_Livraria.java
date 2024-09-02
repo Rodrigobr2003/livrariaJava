@@ -11,11 +11,11 @@ public class Projeto_Livraria {
     public static void main(String[] args) {
         
         Scanner scanner = new Scanner(System.in);
-//        GerenciadorUsers gerenciadorUsuarios = new GerenciadorUsers();
+        GerenciadorUsers gerenciadorUsuarios = new GerenciadorUsers();
         GerenciadorLivros gerenciadorLivros = new GerenciadorLivros();
         
         int escolha;
-//        int counterUser = gerenciadorUsuarios.ultimoID;
+        int counterUser = gerenciadorUsuarios.ultimoIDUser;
         int counterLivro = gerenciadorLivros.ultimoIDLivro;
         
         do{
@@ -36,9 +36,9 @@ public class Projeto_Livraria {
         case 1 -> {
             User usuario = new User();
             
-//            counterUser++;
+            counterUser++;
             
-//            usuario.setID(counterUser);
+            usuario.setID(counterUser);
             
             System.out.print("\nInsira o nome do usuario: ");
             usuario.setNome(scanner.next());
@@ -49,7 +49,7 @@ public class Projeto_Livraria {
             System.out.print("\nInsira o telefone do usuario: ");
             usuario.setTelefone(scanner.next());
             
-//            gerenciadorUsuarios.adicionarUser(usuario);
+            gerenciadorUsuarios.cadastrarUsuario(usuario);
             }
         case 2 -> {
             Livro livro = new Livro();
@@ -104,7 +104,7 @@ public class Projeto_Livraria {
         
         }while(escolha == 2);
         
-//        gerenciadorUsuarios.fecharArquivo();
+        gerenciadorUsuarios.chamarFechamento();
         gerenciadorLivros.chamarFechamento();
         
     }
