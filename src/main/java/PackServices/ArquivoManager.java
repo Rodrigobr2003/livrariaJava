@@ -4,7 +4,6 @@
  */
 package PackServices;
 
-import PackModel.Livro;
 import com.google.gson.*;
 import java.io.*;
 import java.util.*;
@@ -22,13 +21,9 @@ public abstract class ArquivoManager {
     private FileReader fileR;
     private final Gson jsonObj;
     protected String path;
-    private int ultimoID = 0;
 
     protected ArquivoManager(){
         this.jsonObj = new GsonBuilder().setPrettyPrinting().create();
-        
-        //Erro que tera que ser solucionado nos serviços
-//        if(this.fileAM.exists()) this.getDadosArquivo();
     }
     
     //Deve ser executado em todos os filhos antes de iniciar

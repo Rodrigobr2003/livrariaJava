@@ -4,10 +4,7 @@
  */
 package PackServices;
 import PackModel.Livro;
-import com.google.gson.*;
 import java.io.*;
-import java.lang.reflect.Type;
-import com.google.gson.reflect.TypeToken;
 import java.util.*;
 
 /**
@@ -17,7 +14,6 @@ import java.util.*;
 public final class GerenciadorLivros extends ArquivoManager{
 
     private File file;
-    private String path = System.getProperty("user.home")+"\\Desktop\\livros.json";
     private ArrayList<Livro> listaLivros = new ArrayList<>();
     private ArrayList<Livro> loadedLivros;
     public int ultimoIDLivro = 0;
