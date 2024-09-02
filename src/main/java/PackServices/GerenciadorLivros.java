@@ -15,9 +15,7 @@ import java.util.*;
  * @author Rodrigo
  */
 public final class GerenciadorLivros extends ArquivoManager{
-    
-    //TALVEZ SEJA NECESSÁRIO CADA ARQUIVO GERENCIADOR TER O SEUS IMPORTS
-    //DE FILES, ONDE O VALOR É ALOCADO POR MEIO DO ARQV. MANAGER
+
     private File file;
     private String path = System.getProperty("user.home")+"\\Desktop\\livros.json";
     private ArrayList<Livro> listaLivros = new ArrayList<>();
@@ -29,22 +27,19 @@ public final class GerenciadorLivros extends ArquivoManager{
         
         this.file = criarArquivo("livros.json");
         
-        if(file.exists()) this.loadedLivros = getDadosArquivo(Livro.class, listaLivros);
-
-        if (!loadedLivros.isEmpty()) {
+        if(file.exists())this.loadedLivros = getDadosArquivo(Livro.class, listaLivros);
+        
+        if (loadedLivros != null && !loadedLivros.isEmpty()) {
             this.ultimoIDLivro = loadedLivros.getLast().getID();
             this.listaLivros = loadedLivros;
         }
         
         escreverArquivo();
-        
-        fecharArquivo(this.listaLivros);
     }
     
     public void cadastrarLivro(Livro livro){
         this.listaLivros.add(livro);
-        
-        escreverArquivo();
+        System.out.println(listaLivros);
     }
     
     public void chamarFechamento(){

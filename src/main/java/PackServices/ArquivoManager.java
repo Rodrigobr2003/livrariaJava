@@ -23,7 +23,7 @@ public abstract class ArquivoManager {
     private final Gson jsonObj;
     protected String path;
     private int ultimoID = 0;
-    
+
     protected ArquivoManager(){
         this.jsonObj = new GsonBuilder().setPrettyPrinting().create();
         
@@ -37,7 +37,7 @@ public abstract class ArquivoManager {
         this.path = System.getProperty("user.home") + "\\Desktop\\" + nomeDoc;
         try{
             this.fileAM = new File(this.path);
-            
+           
             //So esta criando o aqrv por conta disso
             this.fileAM.createNewFile();
         }catch(IOException e){
