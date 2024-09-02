@@ -1,7 +1,9 @@
 package com.mycompany.projeto_livraria;
 
+import PackModel.Emprestimo;
 import PackModel.Livro;
 import PackModel.User;
+import PackServices.GerenciadorEmprestimos;
 import PackServices.GerenciadorLivros;
 import PackServices.GerenciadorUsers;
 import java.util.*;
@@ -13,6 +15,7 @@ public class Projeto_Livraria {
         Scanner scanner = new Scanner(System.in);
         GerenciadorUsers gerenciadorUsuarios = new GerenciadorUsers();
         GerenciadorLivros gerenciadorLivros = new GerenciadorLivros();
+        GerenciadorEmprestimos gerenciadorEmprestimos = new GerenciadorEmprestimos();
         
         int escolha;
         int counterUser = gerenciadorUsuarios.ultimoIDUser;
@@ -76,7 +79,19 @@ public class Projeto_Livraria {
             gerenciadorLivros.cadastrarLivro(livro);
         }
         case 3 -> {
-            System.out.println("Emprestar Livro");
+            
+            Emprestimo emprestimo = new Emprestimo();
+            
+            String resultado;
+            
+            System.out.print("\nEscolha o usuario que deseja adicionar o emprestimo");
+            System.out.print("\nPesquisar usuario por nome: ");
+
+            resultado = gerenciadorUsuarios.pesquisarUser(scanner.next());
+            
+            System.out.print("\nResultados: ");
+            System.out.println(resultado);
+            System.out.print("\nEscolha um usuario pelo ID para emprestar: ");
             }
         case 4 -> {
             System.out.println("Devolver Livro");

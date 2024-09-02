@@ -60,4 +60,14 @@ public class User {
         return "Nome: " + this.nome + ", Email: " + this.email + " e Telefone: " + this.telefone;
     }
     
+    @Override
+    public String toString(){
+        return "{" +
+                ", ID =" + this.ID + '\'' +
+                "nome='" + this.nome +
+                ", email=" + this.email +
+                ", telefone=" + this.telefone +
+                '}';
+    }
+    
 }

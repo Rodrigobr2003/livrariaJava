@@ -17,6 +17,7 @@ public final class GerenciadorUsers extends ArquivoManager{
     private ArrayList<User> listaUsers = new ArrayList<>();
     private ArrayList<User> loadedUsers;
     public int ultimoIDUser = 0;
+    private ArrayList<User> resultadoPesquisa;
 
     public GerenciadorUsers() {
         super();
@@ -37,8 +38,21 @@ public final class GerenciadorUsers extends ArquivoManager{
         this.listaUsers.add(user);
     }
     
-    
     public void chamarFechamento(){
         fecharArquivo(this.listaUsers);
+    }
+    
+    public String pesquisarUser(String nome){
+        
+        resultadoPesquisa = new ArrayList<>();
+        
+        for(User user : listaUsers){
+            if(user.getNome().equals(nome)){
+                resultadoPesquisa.add(user);
+            }
+        }
+        
+        return resultadoPesquisa.toString();
+        
     }
 }
