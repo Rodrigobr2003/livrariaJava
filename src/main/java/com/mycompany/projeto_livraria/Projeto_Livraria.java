@@ -101,7 +101,10 @@ public class Projeto_Livraria {
 
                 //Resultado da pesquisa do nome do user
                 resultadoUser = gerenciadorUsuarios.pesquisarUser(scanner.next());
-
+                
+                if(resultadoUser == null || resultadoUser.contains("[]")) System.out.print("\nUsuario nao encontrado...\n");
+                
+            }while(resultadoUser == null  || resultadoUser.contains("[]"));
                 System.out.print("\nResultados: ");
                 System.out.println(resultadoUser);
                 System.out.print("\nEscolha um usuario pelo ID para emprestar: ");
@@ -109,9 +112,6 @@ public class Projeto_Livraria {
                 //Aqui aloca dentro da instancia emprestimo o usuario escolhido
                 userSelecionado = gerenciadorUsuarios.pesquisarUser(scanner.nextInt());
                 emprestimo.setUsario(userSelecionado);
-
-                if(userSelecionado == null) System.out.print("\nUsuario nao encontrado...");
-            }while(userSelecionado == null);
             
             //Do-while para selecionar livro
             do{
@@ -120,29 +120,29 @@ public class Projeto_Livraria {
 
                 //Resultado da pesquisa do nome do livro
                 resultadoLivro = gerenciadorLivros.pesquisarLivro(scanner.next());
-
+                
+                if(resultadoLivro == null  || resultadoLivro.contains("[]")) System.out.print("\nLivro nao encontrado...\n");
+                
+            }while(resultadoLivro == null || resultadoLivro.contains("[]"));
+            
                 System.out.print("\nResultados: ");
                 System.out.println(resultadoLivro);
                 System.out.print("\nEscolha um livro pelo ID para emprestar: ");
 
                 //Aqui aloca dentro da instancia emprestimo o livro escolhido
                 livroSelecionado = gerenciadorLivros.pesquisarLivro(scanner.nextInt());
-                emprestimo.setLivro(livroSelecionado);
-
-                if(livroSelecionado == null) System.out.print("\nUsuario nao encontrado...");
-                
-            }while(livroSelecionado == null);
+                emprestimo.setLivro(livroSelecionado);            
             
             //Aqui aloca dentro da instancia emprestimo a data escolhida
             emprestimo.setDataEmprestimo(LocalDate.now().format(formatter));
             
             //Aqui aloca dentro da instancia emprestimo a data de devolução
-            emprestimo.setDataEmprestimo(LocalDate.now().plusMonths(1).format(formatter));
+            emprestimo.setDataDevolucao(LocalDate.now().plusMonths(1).format(formatter));
             
             //Adiciona conteudo no arquivo
             gerenciadorEmprestimos.cadastrarEmprestimo(emprestimo);
             
-            System.out.print("\nLivro emprestado com sucesso!");
+            System.out.println("\nLivro emprestado com sucesso!");
             
             }
         case 4 -> {
@@ -173,6 +173,7 @@ public class Projeto_Livraria {
         
         gerenciadorUsuarios.chamarFechamento();
         gerenciadorLivros.chamarFechamento();
+        gerenciadorEmprestimos.chamarFechamento();
         
     }
 }

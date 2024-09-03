@@ -12,7 +12,7 @@ import java.util.ArrayList;
  *
  * @author Rodrigo
  */
-public class GerenciadorEmprestimos extends ArquivoManager{
+public final class GerenciadorEmprestimos extends ArquivoManager{
     
     private File file;
     private ArrayList<Emprestimo> listaEmprestimos = new ArrayList<>();

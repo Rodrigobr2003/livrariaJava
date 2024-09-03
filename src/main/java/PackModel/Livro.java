@@ -89,13 +89,13 @@ public class Livro {
     @Override
     public String toString(){
         return "{" +
-                ", ID =" + this.ID + '\'' +
-                "titulo='" + this.titulo +
+                "ID =" + this.ID + '\'' +
+                ", titulo='" + this.titulo +
                 ", autor=" + this.autor +
                 ", quantidade=" + this.quantidade +
-                "titulo='" + this.isbn +
-                ", autor=" + this.dataPublicacao +
-                ", quantidade=" + this.emprestado +
+                ", ISBN='" + this.isbn +
+                ", data de publicação=" + this.dataPublicacao +
+                ", emprestado=" + this.emprestado +
                 '}';
     }
 }
