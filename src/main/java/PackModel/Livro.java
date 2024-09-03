@@ -14,7 +14,6 @@ public class Livro {
     private String autor;
     private int quantidade;
     private String isbn;
-//    private LocalDate dataPublicacao;
     private String dataPublicacao;
     private boolean emprestado = false;
     
@@ -85,5 +84,18 @@ public class Livro {
     
     public boolean getEmprestado(){
         return this.emprestado;
+    }
+    
+    @Override
+    public String toString(){
+        return "{" +
+                ", ID =" + this.ID + '\'' +
+                "titulo='" + this.titulo +
+                ", autor=" + this.autor +
+                ", quantidade=" + this.quantidade +
+                "titulo='" + this.isbn +
+                ", autor=" + this.dataPublicacao +
+                ", quantidade=" + this.emprestado +
+                '}';
     }
 }

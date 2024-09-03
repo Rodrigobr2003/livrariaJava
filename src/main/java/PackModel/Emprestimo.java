@@ -4,23 +4,34 @@
  */
 package PackModel;
 
-import java.time.LocalDate;
-
 /**
  *
  * @author Rodrigo
  */
 public class Emprestimo {
+    private int ID;
     private Livro livro;
     private User usuario;
-    private LocalDate dataEmprestimo;
-    private LocalDate dataDevolucao;
+    private String dataEmprestimo;
+    private String dataDevolucao;
     
-    public Emprestimo(Livro livro, User usuario, LocalDate dataEmprestimo, LocalDate dataDevolucao){
+    public Emprestimo(){
+        
+    }
+    
+    public Emprestimo(Livro livro, User usuario, String dataEmprestimo, String dataDevolucao){
         this.livro = livro;
         this.usuario = usuario;
         this.dataEmprestimo = dataEmprestimo;
         this.dataDevolucao = dataDevolucao;
+    }
+    
+    public void setID(int ID){
+        this.ID = ID;
+    }
+    
+    public int getID(){
+        return this.ID;
     }
     
     public void setLivro(Livro livro){
@@ -39,19 +50,19 @@ public class Emprestimo {
         return this.usuario;
     }
     
-    public void setDataEmprestimo(LocalDate dataEmprestimo){
+    public void setDataEmprestimo(String dataEmprestimo){
         this.dataEmprestimo = dataEmprestimo;
     }
     
-    public LocalDate getDataEmprestimo(){
+    public String getDataEmprestimo(){
         return this.dataEmprestimo;
     }
     
-    public void setDataDevolucao(LocalDate dataDevolucao){
+    public void setDataDevolucao(String dataDevolucao){
         this.dataDevolucao = dataDevolucao;
     }
     
-    public LocalDate getDataDevolucao(){
+    public String getDataDevolucao(){
         return this.dataDevolucao;
     }
     

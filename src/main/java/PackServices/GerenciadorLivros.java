@@ -17,6 +17,7 @@ public final class GerenciadorLivros extends ArquivoManager{
     private ArrayList<Livro> listaLivros = new ArrayList<>();
     private ArrayList<Livro> loadedLivros;
     public int ultimoIDLivro = 0;
+    private ArrayList<Livro> resultadoPesquisa;
     
     public GerenciadorLivros(){
         super();
@@ -40,5 +41,32 @@ public final class GerenciadorLivros extends ArquivoManager{
     
     public void chamarFechamento(){
         fecharArquivo(listaLivros);
+    }
+    
+    public String pesquisarLivro(String titulo){
+        
+        resultadoPesquisa = new ArrayList<>();
+        
+        for(Livro livro : listaLivros){
+            if(livro.getTitulo().equals(titulo)){
+                resultadoPesquisa.add(livro);
+            }
+        }
+        
+        return resultadoPesquisa.toString();
+    }
+    
+    public Livro pesquisarLivro(int ID){
+        
+        Optional<Livro> livroSelecionado = listaLivros.stream()
+                .filter(li -> li.getID() == ID)
+                .findFirst();
+        
+        if(livroSelecionado.isPresent()){
+            return livroSelecionado.get();
+        }else{
+            return null;
+        }
+        
     }
 }

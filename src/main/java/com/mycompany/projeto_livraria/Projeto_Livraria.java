@@ -1,4 +1,4 @@
-package com.mycompany.projeto_livraria;
+    package com.mycompany.projeto_livraria;
 
 import PackModel.Emprestimo;
 import PackModel.Livro;
@@ -6,6 +6,8 @@ import PackModel.User;
 import PackServices.GerenciadorEmprestimos;
 import PackServices.GerenciadorLivros;
 import PackServices.GerenciadorUsers;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 public class Projeto_Livraria {
@@ -16,10 +18,12 @@ public class Projeto_Livraria {
         GerenciadorUsers gerenciadorUsuarios = new GerenciadorUsers();
         GerenciadorLivros gerenciadorLivros = new GerenciadorLivros();
         GerenciadorEmprestimos gerenciadorEmprestimos = new GerenciadorEmprestimos();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         
         int escolha;
         int counterUser = gerenciadorUsuarios.ultimoIDUser;
         int counterLivro = gerenciadorLivros.ultimoIDLivro;
+        int counterEmprestimo = gerenciadorEmprestimos.ultimoIDEmprestimo;
         
         do{
         System.out.println("Sistema de Gerenciamento de Biblioteca");
@@ -79,19 +83,67 @@ public class Projeto_Livraria {
             gerenciadorLivros.cadastrarLivro(livro);
         }
         case 3 -> {
-            
             Emprestimo emprestimo = new Emprestimo();
             
-            String resultado;
+            counterEmprestimo++;
             
-            System.out.print("\nEscolha o usuario que deseja adicionar o emprestimo");
-            System.out.print("\nPesquisar usuario por nome: ");
+            emprestimo.setID(counterEmprestimo);
+            
+            User userSelecionado;
+            Livro livroSelecionado;
+            String resultadoUser;
+            String resultadoLivro;
+            
+            //Do-while para selecionar user
+            do{
+                System.out.print("\nEscolha o usuario que deseja adicionar o emprestimo");
+                System.out.print("\nPesquisar usuario por nome: ");
 
-            resultado = gerenciadorUsuarios.pesquisarUser(scanner.next());
+                //Resultado da pesquisa do nome do user
+                resultadoUser = gerenciadorUsuarios.pesquisarUser(scanner.next());
+
+                System.out.print("\nResultados: ");
+                System.out.println(resultadoUser);
+                System.out.print("\nEscolha um usuario pelo ID para emprestar: ");
+
+                //Aqui aloca dentro da instancia emprestimo o usuario escolhido
+                userSelecionado = gerenciadorUsuarios.pesquisarUser(scanner.nextInt());
+                emprestimo.setUsario(userSelecionado);
+
+                if(userSelecionado == null) System.out.print("\nUsuario nao encontrado...");
+            }while(userSelecionado == null);
             
-            System.out.print("\nResultados: ");
-            System.out.println(resultado);
-            System.out.print("\nEscolha um usuario pelo ID para emprestar: ");
+            //Do-while para selecionar livro
+            do{
+                System.out.print("\nEscolha o livro que deseja emprestar");
+                System.out.print("\nPesquisar livro por nome: ");
+
+                //Resultado da pesquisa do nome do livro
+                resultadoLivro = gerenciadorLivros.pesquisarLivro(scanner.next());
+
+                System.out.print("\nResultados: ");
+                System.out.println(resultadoLivro);
+                System.out.print("\nEscolha um livro pelo ID para emprestar: ");
+
+                //Aqui aloca dentro da instancia emprestimo o livro escolhido
+                livroSelecionado = gerenciadorLivros.pesquisarLivro(scanner.nextInt());
+                emprestimo.setLivro(livroSelecionado);
+
+                if(livroSelecionado == null) System.out.print("\nUsuario nao encontrado...");
+                
+            }while(livroSelecionado == null);
+            
+            //Aqui aloca dentro da instancia emprestimo a data escolhida
+            emprestimo.setDataEmprestimo(LocalDate.now().format(formatter));
+            
+            //Aqui aloca dentro da instancia emprestimo a data de devolução
+            emprestimo.setDataEmprestimo(LocalDate.now().plusMonths(1).format(formatter));
+            
+            //Adiciona conteudo no arquivo
+            gerenciadorEmprestimos.cadastrarEmprestimo(emprestimo);
+            
+            System.out.print("\nLivro emprestado com sucesso!");
+            
             }
         case 4 -> {
             System.out.println("Devolver Livro");

@@ -42,7 +42,7 @@ public final class GerenciadorUsers extends ArquivoManager{
         fecharArquivo(this.listaUsers);
     }
     
-    public String pesquisarUser(String nome){
+        public String pesquisarUser(String nome){
         
         resultadoPesquisa = new ArrayList<>();
         
@@ -53,6 +53,20 @@ public final class GerenciadorUsers extends ArquivoManager{
         }
         
         return resultadoPesquisa.toString();
+        
+    }
+    
+    public User pesquisarUser(int ID){
+        Optional<User> userSelecionado = listaUsers.stream()
+                .filter(us -> us.getID() == ID)
+                .findFirst();
+        
+        if(userSelecionado.isPresent()){
+            return userSelecionado.get();
+        }
+        else{
+            return null;
+        }
         
     }
 }
