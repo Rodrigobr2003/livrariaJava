@@ -94,6 +94,9 @@ public class Projeto_Livraria {
             String resultadoUser;
             String resultadoLivro;
             
+            //AQUI NÃO É POSSIVEL PESQUISAR POR NOMES QUE CONTENHAM ESPAÇO OU
+            //LETRAS MINUSCULAS OU MAIUSCULAS --> CORRIGIR DPS
+            
             //Do-while para selecionar user
             do{
                 System.out.print("\nEscolha o usuario que deseja adicionar o emprestimo");
@@ -158,7 +161,10 @@ public class Projeto_Livraria {
             System.out.println("Historico de Emprestimos");
             }
         case 8 -> {
-            System.out.println("Consulta de Livros");
+            
+            System.out.println("Todos os livros: ");
+            
+            System.out.println(gerenciadorLivros.getLivros());
         }
         case 9 -> {
             System.exit(0);
