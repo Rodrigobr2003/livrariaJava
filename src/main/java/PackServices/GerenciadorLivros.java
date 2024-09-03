@@ -85,4 +85,8 @@ public final class GerenciadorLivros extends ArquivoManager{
         
         return varEnvio;
     }
+    
+        public void excluirLivro(int ID){
+        listaLivros.removeIf(us -> us.getID() == ID);
+    }
 }

@@ -152,14 +152,50 @@ public class Projeto_Livraria {
             System.out.println("Devolver Livro");
         }
         case 5 -> {
-            System.out.println("Excluir Usuario");
+            String resultadoUser;
+            
+            //Do-while para selecionar user
+            do{
+                System.out.print("\nEscolha o usuario que deseja procurar");
+                System.out.print("\nPesquisar usuario por nome: ");
+
+                //Resultado da pesquisa do nome do user
+                resultadoUser = gerenciadorUsuarios.pesquisarUser(scanner.next());
+                
+                if(resultadoUser == null || resultadoUser.contains("[]")) System.out.print("\nUsuario nao encontrado...\n");
+                
+            }while(resultadoUser == null  || resultadoUser.contains("[]"));
+            
+            System.out.print("\nResultados: ");
+            System.out.println(resultadoUser);
+            
+            System.out.print("\nEscolha o ID do usuario para exclui-lo: ");
+            gerenciadorUsuarios.excluirUser(scanner.nextInt());
             }
         case 6 -> {
-            System.out.println("Excluir Livro");
+            String resultadoLivro;
+            
+            //Do-while para selecionar user
+            do{
+                System.out.print("\nEscolha o livro que deseja procurar");
+                System.out.print("\nPesquisar livro por nome: ");
+
+                //Resultado da pesquisa do nome do user
+                resultadoLivro = gerenciadorLivros.pesquisarLivro(scanner.next());
+                
+                if(resultadoLivro == null || resultadoLivro.contains("[]")) System.out.print("\nUsuario nao encontrado...\n");
+                
+            }while(resultadoLivro == null  || resultadoLivro.contains("[]"));
+            
+            System.out.print("\nResultados: ");
+            System.out.println(resultadoLivro);
+            
+            System.out.print("\nEscolha o ID do livro para exclui-lo: ");
+            gerenciadorLivros.excluirLivro(scanner.nextInt());
         }
         case 7 -> {
             System.out.println("Historico de Emprestimos");
-            }
+        }
         case 8 -> {
             
             System.out.println("Todos os livros: ");

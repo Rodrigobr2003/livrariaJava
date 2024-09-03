@@ -81,5 +81,5 @@ public abstract class ArquivoManager {
             System.out.println("Erro ao encerrar leitura...");
         }
         return listaLoaded;        
-    }
+    }    
 }

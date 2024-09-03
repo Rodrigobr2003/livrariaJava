@@ -69,4 +69,8 @@ public final class GerenciadorUsers extends ArquivoManager{
         }
         
     }
+    
+    public void excluirUser(int ID){
+        listaUsers.removeIf(us -> us.getID() == ID);
+    }
 }
