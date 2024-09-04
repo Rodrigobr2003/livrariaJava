@@ -146,11 +146,33 @@ public class Projeto_Livraria {
             //Adiciona conteudo no arquivo
             gerenciadorEmprestimos.cadastrarEmprestimo(emprestimo);
             
+            userSelecionado.setListaEmprestimos(emprestimo.getDadosEmprestimoUser());
+            
             System.out.println("\nLivro emprestado com sucesso!");
             
             }
         case 4 -> {
-            System.out.println("Devolver Livro");
+            
+            String resultadoUser;
+            User userSelecionado;
+            
+            do{
+                System.out.print("\nEscolha o usuario que deseja adicionar o emprestimo");
+                System.out.print("\nPesquisar usuario por nome: ");
+
+                //Resultado da pesquisa do nome do user
+                resultadoUser = gerenciadorUsuarios.pesquisarUser(scanner.next());
+                
+                if(resultadoUser == null || resultadoUser.contains("[]")) System.out.print("\nUsuario nao encontrado...\n");
+                
+            }while(resultadoUser == null  || resultadoUser.contains("[]"));
+            
+            System.out.print("\nResultados: ");
+                System.out.println(resultadoUser);
+                System.out.print("\nEscolha um usuario pelo ID para emprestar: ");
+
+                //Aqui aloca dentro da instancia emprestimo o usuario escolhido
+                userSelecionado = gerenciadorUsuarios.pesquisarUser(scanner.nextInt());
         }
         case 5 -> {
             String resultadoUser;

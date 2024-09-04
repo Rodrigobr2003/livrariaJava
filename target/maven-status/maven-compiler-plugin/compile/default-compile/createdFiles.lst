@@ -1,3 +1,4 @@
+PackModel\DadosEmprestimoUser.class
 PackModel\Livro.class
 PackModel\Emprestimo.class
 PackServices\ArquivoManager.class

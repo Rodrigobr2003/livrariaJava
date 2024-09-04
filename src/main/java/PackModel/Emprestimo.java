@@ -8,7 +8,7 @@ package PackModel;
  *
  * @author Rodrigo
  */
-public class Emprestimo {
+public class Emprestimo{
     private int ID;
     private Livro livro;
     private User usuario;
@@ -78,4 +78,9 @@ public class Emprestimo {
     public String getEmprestimo(){
         return "Livro: " + this.livro + ", Usuario: " + this.usuario + ", Data emprestimo: " + this.dataEmprestimo + " e Data devolucao: " + this.dataDevolucao;
     }
+    
+    public Object getDadosEmprestimoUser(){
+        return new DadosEmprestimoUser(1, "10", "10", true);
+    }
+    
 }

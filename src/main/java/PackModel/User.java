@@ -4,6 +4,8 @@
  */
 package PackModel;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author Rodrigo
@@ -13,9 +15,10 @@ public class User {
     private String nome;
     private String email;
     private String telefone;
+    private ArrayList<Object> listaEmprestimos;
     
     public User(){
-        
+        listaEmprestimos = new ArrayList<>();
     }
     
     public User(String nome, String email, String telefone){
@@ -56,6 +59,10 @@ public class User {
         return this.telefone;
     }
     
+    public void setListaEmprestimos(Object objeto){
+        this.listaEmprestimos.add(objeto);
+    }
+    
     public String getUser(){
         return "Nome: " + this.nome + ", Email: " + this.email + " e Telefone: " + this.telefone;
     }
@@ -68,6 +75,5 @@ public class User {
                 ", email=" + this.email +
                 ", telefone=" + this.telefone +
                 '}';
-    }
-    
+    }    
 }
