@@ -15,7 +15,6 @@ public class Livro {
     private int quantidade;
     private String isbn;
     private String dataPublicacao;
-    private boolean emprestado = false;
     
     public Livro(){
         
@@ -26,7 +25,6 @@ public class Livro {
         this.autor = autor;
         this.isbn = isbn;
         this.dataPublicacao = dataPublicacao;
-        this.emprestado = false;
     }
     
     public void setID(int ID){
@@ -78,14 +76,6 @@ public class Livro {
         return this.dataPublicacao;
     }
     
-    public void setEmprestado(boolean emprestado){
-        this.emprestado = emprestado;
-    }
-    
-    public boolean getEmprestado(){
-        return this.emprestado;
-    }
-    
     @Override
     public String toString(){
         return """
@@ -96,7 +86,6 @@ public class Livro {
                 ", quantidade=" + this.quantidade +
                 ", ISBN='" + this.isbn +
                 ", data de publicacao=" + this.dataPublicacao +
-                ", emprestado=" + this.emprestado +
                 "}";
     }
 }

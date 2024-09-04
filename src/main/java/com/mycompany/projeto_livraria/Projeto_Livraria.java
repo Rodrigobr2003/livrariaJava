@@ -134,8 +134,9 @@ public class Projeto_Livraria {
 
                 //Aqui aloca dentro da instancia emprestimo o livro escolhido
                 livroSelecionado = gerenciadorLivros.pesquisarLivro(scanner.nextInt());
-                emprestimo.setLivro(livroSelecionado);            
-            
+                
+                emprestimo.setLivro(livroSelecionado);
+                
             //Aqui aloca dentro da instancia emprestimo a data escolhida
             emprestimo.setDataEmprestimo(LocalDate.now().format(formatter));
             

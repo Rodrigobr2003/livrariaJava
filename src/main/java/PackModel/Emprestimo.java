@@ -14,9 +14,10 @@ public class Emprestimo {
     private User usuario;
     private String dataEmprestimo;
     private String dataDevolucao;
+    private boolean emprestado;
     
     public Emprestimo(){
-        
+        this.emprestado = true;
     }
     
     public Emprestimo(Livro livro, User usuario, String dataEmprestimo, String dataDevolucao){
@@ -64,6 +65,14 @@ public class Emprestimo {
     
     public String getDataDevolucao(){
         return this.dataDevolucao;
+    }
+    
+    public void setEmprestado(boolean emprestado){
+        this.emprestado = emprestado;
+    }
+    
+    public boolean getEmprestado(){
+        return this.emprestado;
     }
     
     public String getEmprestimo(){
