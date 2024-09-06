@@ -90,52 +90,18 @@ public class Projeto_Livraria {
             emprestimo.setID(counterEmprestimo);
             
             User userSelecionado;
-            Livro livroSelecionado;
-            String resultadoUser;
-            String resultadoLivro;
             
             //AQUI NÃO É POSSIVEL PESQUISAR POR NOMES QUE CONTENHAM ESPAÇO OU
             //LETRAS MINUSCULAS OU MAIUSCULAS --> CORRIGIR DPS
+
+            System.out.print("\nEscolha o usuario que deseja adicionar o emprestimo");
+            userSelecionado = gerenciadorUsuarios.escolherUser();
             
-            //Do-while para selecionar user
-            do{
-                System.out.print("\nEscolha o usuario que deseja adicionar o emprestimo");
-                System.out.print("\nPesquisar usuario por nome: ");
-
-                //Resultado da pesquisa do nome do user
-                resultadoUser = gerenciadorUsuarios.pesquisarUser(scanner.next());
+            emprestimo.setUsario(gerenciadorUsuarios
+                .objetoUserSemHistorico(userSelecionado));
                 
-                if(resultadoUser == null || resultadoUser.contains("[]")) System.out.print("\nUsuario nao encontrado...\n");
-                
-            }while(resultadoUser == null  || resultadoUser.contains("[]"));
-                System.out.print("\nResultados: ");
-                System.out.println(resultadoUser);
-                System.out.print("\nEscolha um usuario pelo ID para emprestar: ");
-
-                //Aqui aloca dentro da instancia emprestimo o usuario escolhido
-                userSelecionado = gerenciadorUsuarios.pesquisarUser(scanner.nextInt());
-                emprestimo.setUsario(gerenciadorUsuarios.objetoUserSemHistorico(userSelecionado));
-            
-            //Do-while para selecionar livro
-            do{
-                System.out.print("\nEscolha o livro que deseja emprestar");
-                System.out.print("\nPesquisar livro por nome: ");
-
-                //Resultado da pesquisa do nome do livro
-                resultadoLivro = gerenciadorLivros.pesquisarLivro(scanner.next());
-                
-                if(resultadoLivro == null  || resultadoLivro.contains("[]")) System.out.print("\nLivro nao encontrado...\n");
-                
-            }while(resultadoLivro == null || resultadoLivro.contains("[]"));
-            
-                System.out.print("\nResultados: ");
-                System.out.println(resultadoLivro);
-                System.out.print("\nEscolha um livro pelo ID para emprestar: ");
-
-                //Aqui aloca dentro da instancia emprestimo o livro escolhido
-                livroSelecionado = gerenciadorLivros.pesquisarLivro(scanner.nextInt());
-                
-                emprestimo.setLivro(livroSelecionado);
+            System.out.print("\nEscolha o livro que deseja emprestar");
+            emprestimo.setLivro(gerenciadorLivros.escolherLivro());
                 
             //Aqui aloca dentro da instancia emprestimo a data escolhida
             emprestimo.setDataEmprestimo(LocalDate.now().format(formatter));
@@ -154,26 +120,8 @@ public class Projeto_Livraria {
             }
         case 4 -> {
             
-            String resultadoUser;
-            User userSelecionado;
-            
-            do{
-                System.out.print("\nEscolha o usuario que deseja devolver o emprestimo");
-                System.out.print("\nPesquisar usuario por nome: ");
-
-                //Resultado da pesquisa do nome do user
-                resultadoUser = gerenciadorUsuarios.pesquisarUser(scanner.next());
-                
-                if(resultadoUser == null || resultadoUser.contains("[]")) System.out.print("\nUsuario nao encontrado...\n");
-                
-            }while(resultadoUser == null  || resultadoUser.contains("[]"));
-            
-            System.out.print("\nResultados: ");
-            System.out.println(resultadoUser);
-            System.out.print("\nEscolha um usuario pelo ID para realizar a devolucao: ");
-
-            //Aqui aloca dentro da instancia emprestimo o usuario escolhido
-            userSelecionado = gerenciadorUsuarios.pesquisarUser(scanner.nextInt());
+            System.out.print("\nEscolha o usuario que deseja devolver o emprestimo");
+            User userSelecionado = gerenciadorUsuarios.escolherUser();
 
             System.out.print("\nEmprestimos do " + userSelecionado.getNome() + " :");
             //Mostra todos os emprestimos do user
@@ -192,72 +140,26 @@ public class Projeto_Livraria {
             
         }
         case 5 -> {
-            String resultadoUser;
             
-            //Do-while para selecionar user
-            do{
-                System.out.print("\nEscolha o usuario que deseja procurar");
-                System.out.print("\nPesquisar usuario por nome: ");
+            System.out.print("\nEscolha o usuario que deseja procurar para excluir");
 
-                //Resultado da pesquisa do nome do user
-                resultadoUser = gerenciadorUsuarios.pesquisarUser(scanner.next());
-                
-                if(resultadoUser == null || resultadoUser.contains("[]")) System.out.print("\nUsuario nao encontrado...\n");
-                
-            }while(resultadoUser == null  || resultadoUser.contains("[]"));
-            
-            System.out.print("\nResultados: ");
-            System.out.println(resultadoUser);
-            
-            System.out.print("\nEscolha o ID do usuario para exclui-lo: ");
-            gerenciadorUsuarios.excluirUser(scanner.nextInt());
+            gerenciadorUsuarios.excluirUser(gerenciadorUsuarios.escolherUser().getID());
             }
         case 6 -> {
-            String resultadoLivro;
-            
-            //Do-while para selecionar user
-            do{
-                System.out.print("\nEscolha o livro que deseja procurar");
-                System.out.print("\nPesquisar livro por nome: ");
+                        
+            System.out.print("\nEscolha o livro que deseja excluir");
 
-                //Resultado da pesquisa do nome do user
-                resultadoLivro = gerenciadorLivros.pesquisarLivro(scanner.next());
-                
-                if(resultadoLivro == null || resultadoLivro.contains("[]")) System.out.print("\nUsuario nao encontrado...\n");
-                
-            }while(resultadoLivro == null  || resultadoLivro.contains("[]"));
-            
-            System.out.print("\nResultados: ");
-            System.out.println(resultadoLivro);
-            
-            System.out.print("\nEscolha o ID do livro para exclui-lo: ");
-            gerenciadorLivros.excluirLivro(scanner.nextInt());
+            gerenciadorLivros.excluirLivro(gerenciadorLivros.escolherLivro().getID());
         }
         case 7 -> {
             
-            String resultadoUser;
             User userSelecionado;
             
-            do{
-                System.out.print("\nEscolha o usuario que deseja verificar o historico");
-                System.out.print("\nPesquisar usuario por nome: ");
-
-                //Resultado da pesquisa do nome do user
-                resultadoUser = gerenciadorUsuarios.pesquisarUser(scanner.next());
+            userSelecionado = gerenciadorUsuarios.escolherUser();
                 
-                if(resultadoUser == null || resultadoUser.contains("[]")) System.out.print("\nUsuario nao encontrado...\n");
+            System.out.print("\nEmprestimos do " + userSelecionado.getNome() + " :");
                 
-            }while(resultadoUser == null  || resultadoUser.contains("[]"));
-                System.out.print("\nResultados: ");
-                System.out.println(resultadoUser);
-                System.out.print("\nEscolha um usuario pelo ID para verificar: ");
-
-                //Aqui aloca dentro da instancia emprestimo o usuario escolhido
-                userSelecionado = gerenciadorUsuarios.pesquisarUser(scanner.nextInt());
-                
-                System.out.print("\nEmprestimos do " + userSelecionado.getNome() + " :");
-                
-                System.out.println("\n" + gerenciadorUsuarios.getHistoricoEmprestimos(userSelecionado));
+            System.out.println("\n" + gerenciadorUsuarios.getHistoricoEmprestimos(userSelecionado));
         }
         case 8 -> {
             
@@ -266,11 +168,15 @@ public class Projeto_Livraria {
             System.out.println(gerenciadorLivros.getLivros());
         }
         case 9 -> {
+            gerenciadorUsuarios.chamarFechamento();
+            gerenciadorLivros.chamarFechamento();
+            gerenciadorEmprestimos.chamarFechamento();
+            
             System.exit(0);
         }
         
         }
-        System.out.println("1 - Sair");
+        System.out.println("\n1 - Sair");
         System.out.println("2 - Voltar ao menu");
         escolha = scanner.nextInt();
         

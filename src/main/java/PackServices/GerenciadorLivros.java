@@ -17,7 +17,8 @@ public final class GerenciadorLivros extends ArquivoManager{
     private ArrayList<Livro> listaLivros = new ArrayList<>();
     private ArrayList<Livro> loadedLivros;
     public int ultimoIDLivro = 0;
-    private ArrayList<Livro> resultadoPesquisa  = new ArrayList<>();;
+    private ArrayList<Livro> resultadoPesquisa  = new ArrayList<>();
+    private Scanner scanner = new Scanner(System.in);
     
     public GerenciadorLivros(){
         super();
@@ -88,5 +89,29 @@ public final class GerenciadorLivros extends ArquivoManager{
     
         public void excluirLivro(int ID){
         listaLivros.removeIf(us -> us.getID() == ID);
+    }
+        
+    public Livro escolherLivro(){
+        
+        String resultadoLivro;
+        
+        //Do-while para selecionar livro
+            do{
+
+                System.out.print("\nPesquisar livro pelo titulo: ");
+
+                //Resultado da pesquisa do nome do livro
+                resultadoLivro = pesquisarLivro(scanner.next());
+                
+                if(resultadoLivro == null  || resultadoLivro.contains("[]")) System.out.print("\nLivro nao encontrado...\n");
+                
+            }while(resultadoLivro == null || resultadoLivro.contains("[]"));
+            
+                System.out.print("\nResultados: ");
+                System.out.println(resultadoLivro);
+                
+                System.out.print("\nEscolha um livro pelo ID: ");
+                
+                return this.pesquisarLivro(scanner.nextInt());
     }
 }

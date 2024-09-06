@@ -19,6 +19,7 @@ public final class GerenciadorUsers extends ArquivoManager{
     private ArrayList<User> loadedUsers;
     public int ultimoIDUser = 0;
     private ArrayList<User> resultadoPesquisa = new ArrayList<>();
+    private Scanner scanner = new Scanner(System.in);
 
     public GerenciadorUsers() {
         super();
@@ -102,5 +103,28 @@ public final class GerenciadorUsers extends ArquivoManager{
         }
         
         return pesquisa.toString();
+    }
+    
+    public User escolherUser(){
+        
+        String resultadoUser;
+        
+        //Do-while para selecionar user
+        do{
+                System.out.print("\nPesquisar usuario pelo nome: ");
+
+                //Resultado da pesquisa do nome do user
+                resultadoUser = this.pesquisarUser(scanner.next());
+                
+                if(resultadoUser == null || resultadoUser.contains("[]")) System.out.print("\nUsuario nao encontrado...\n");
+                
+            }while(resultadoUser == null  || resultadoUser.contains("[]"));
+        
+        System.out.print("\nResultados: ");
+        System.out.println(resultadoUser);
+        
+        System.out.print("\nEscolha um usuario pelo ID: ");
+        return this.pesquisarUser(scanner.nextInt());
+
     }
 }
