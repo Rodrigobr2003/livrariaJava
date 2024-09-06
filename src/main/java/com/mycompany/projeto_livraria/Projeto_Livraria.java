@@ -39,7 +39,11 @@ public class Projeto_Livraria {
         System.out.println("9 - Sair");
         System.out.print("Escolha uma opcao: ");
         
-        switch(scanner.nextInt()){
+        int opcao = scanner.nextInt();
+        scanner.nextLine();
+        
+        switch(opcao){
+            
         case 1 -> {
             User usuario = new User();
             
@@ -48,13 +52,14 @@ public class Projeto_Livraria {
             usuario.setID(counterUser);
             
             System.out.print("\nInsira o nome do usuario: ");
-            usuario.setNome(scanner.next());
+            usuario.setNome(scanner.nextLine());
             
             System.out.print("\nInsira o email do usuario: ");
             usuario.setEmail(scanner.next());
+            scanner.nextLine();
             
             System.out.print("\nInsira o telefone do usuario: ");
-            usuario.setTelefone(scanner.next());
+            usuario.setTelefone(scanner.nextLine());
             
             gerenciadorUsuarios.cadastrarUsuario(usuario);
             }
@@ -66,19 +71,20 @@ public class Projeto_Livraria {
             livro.setID(counterLivro);
             
             System.out.print("\nInsira o titulo do livro: ");
-            livro.setTitulo(scanner.next());
+            livro.setTitulo(scanner.nextLine());
             
             System.out.print("\nInsira o nome do autor do livro: ");
-            livro.setAutor(scanner.next());
+            livro.setAutor(scanner.nextLine());
             
             System.out.print("\nInsira a quantidade de livros: ");
             livro.setQuantidade(scanner.nextInt());
+            scanner.nextLine();
             
             System.out.print("\nInsira o ISBN do livro: ");
-            livro.setIsbn(scanner.next());
+            livro.setIsbn(scanner.nextLine());
             
             System.out.print("\nInsira a data de publicacao do livro: ");
-            livro.setDataPublicacao(scanner.next());
+            livro.setDataPublicacao(scanner.nextLine());
             
             gerenciadorLivros.cadastrarLivro(livro);
         }
