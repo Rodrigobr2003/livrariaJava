@@ -114,7 +114,7 @@ public class Projeto_Livraria {
 
                 //Aqui aloca dentro da instancia emprestimo o usuario escolhido
                 userSelecionado = gerenciadorUsuarios.pesquisarUser(scanner.nextInt());
-                emprestimo.setUsario(userSelecionado);
+                emprestimo.setUsario(gerenciadorUsuarios.objetoUserSemHistorico(userSelecionado));
             
             //Do-while para selecionar livro
             do{
@@ -146,7 +146,8 @@ public class Projeto_Livraria {
             //Adiciona conteudo no arquivo
             gerenciadorEmprestimos.cadastrarEmprestimo(emprestimo);
             
-            userSelecionado.setListaEmprestimos(emprestimo.getDadosEmprestimoUser());
+            //Insere infos do emprestimo dentro do historico de emprestimos do user
+            userSelecionado.setListaEmprestimos(emprestimo.getDadosEmprestimoUser(formatter, emprestimo));
             
             System.out.println("\nLivro emprestado com sucesso!");
             
@@ -157,7 +158,7 @@ public class Projeto_Livraria {
             User userSelecionado;
             
             do{
-                System.out.print("\nEscolha o usuario que deseja adicionar o emprestimo");
+                System.out.print("\nEscolha o usuario que deseja devolver o emprestimo");
                 System.out.print("\nPesquisar usuario por nome: ");
 
                 //Resultado da pesquisa do nome do user
@@ -168,11 +169,27 @@ public class Projeto_Livraria {
             }while(resultadoUser == null  || resultadoUser.contains("[]"));
             
             System.out.print("\nResultados: ");
-                System.out.println(resultadoUser);
-                System.out.print("\nEscolha um usuario pelo ID para emprestar: ");
+            System.out.println(resultadoUser);
+            System.out.print("\nEscolha um usuario pelo ID para realizar a devolucao: ");
 
-                //Aqui aloca dentro da instancia emprestimo o usuario escolhido
-                userSelecionado = gerenciadorUsuarios.pesquisarUser(scanner.nextInt());
+            //Aqui aloca dentro da instancia emprestimo o usuario escolhido
+            userSelecionado = gerenciadorUsuarios.pesquisarUser(scanner.nextInt());
+
+            System.out.print("\nEmprestimos do " + userSelecionado.getNome() + " :");
+            //Mostra todos os emprestimos do user
+            System.out.println("\n" + gerenciadorUsuarios.getHistoricoEmprestimos(userSelecionado));
+            
+            System.out.print("\nEscolha o emprestimo que deseja encerrar: ");
+            int escolhaEncerramento = scanner.nextInt();
+            
+            //Define o emprestimo no objeto user como false
+            gerenciadorUsuarios.devolverLivro(userSelecionado, escolhaEncerramento);
+            
+            //Define o emprestimo no objeto emprestimo como false
+            gerenciadorEmprestimos.devolverLivro(escolhaEncerramento);
+            
+            System.out.println("\nEmprestimo encerrado!");
+            
         }
         case 5 -> {
             String resultadoUser;

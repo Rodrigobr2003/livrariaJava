@@ -4,6 +4,7 @@
  */
 package PackServices;
 
+import PackModel.DadosEmprestimoUser;
 import PackModel.User;
 import java.util.*;
 import java.io.*;
@@ -17,7 +18,7 @@ public final class GerenciadorUsers extends ArquivoManager{
     private ArrayList<User> listaUsers = new ArrayList<>();
     private ArrayList<User> loadedUsers;
     public int ultimoIDUser = 0;
-    private ArrayList<User> resultadoPesquisa;
+    private ArrayList<User> resultadoPesquisa = new ArrayList<>();
 
     public GerenciadorUsers() {
         super();
@@ -42,9 +43,9 @@ public final class GerenciadorUsers extends ArquivoManager{
         fecharArquivo(this.listaUsers);
     }
     
-        public String pesquisarUser(String nome){
+    public String pesquisarUser(String nome){
         
-        resultadoPesquisa = new ArrayList<>();
+        String varEnvio;
         
         for(User user : listaUsers){
             if(user.getNome().equals(nome)){
@@ -52,7 +53,10 @@ public final class GerenciadorUsers extends ArquivoManager{
             }
         }
         
-        return resultadoPesquisa.toString();
+        varEnvio = resultadoPesquisa.toString();
+        resultadoPesquisa.clear();
+        
+        return varEnvio;
         
     }
     
@@ -72,5 +76,31 @@ public final class GerenciadorUsers extends ArquivoManager{
     
     public void excluirUser(int ID){
         listaUsers.removeIf(us -> us.getID() == ID);
+    }
+    
+    public void devolverLivro(User user, int ID){
+        Optional<DadosEmprestimoUser> optionalReturn = user.getListaEmprestimos().stream()
+                .filter(em -> em.getID() == ID)
+                .findFirst();
+        
+        if(optionalReturn.isPresent()){
+            DadosEmprestimoUser emprestimoUser = optionalReturn.get();
+            emprestimoUser.setEmprestimo(false);
+        }
+    }
+    
+    public User objetoUserSemHistorico(User user){
+        return new User(user.getID(), user.getNome(), user.getEmail(), user.getTelefone());
+    }
+    
+    public String getHistoricoEmprestimos(User user){
+        String varEnvio;
+        ArrayList<DadosEmprestimoUser> pesquisa = new ArrayList<>();
+        
+        for(DadosEmprestimoUser emp : user.getListaEmprestimos()){
+            pesquisa.add(emp);
+        }
+        
+        return pesquisa.toString();
     }
 }

@@ -4,6 +4,9 @@
  */
 package PackModel;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 /**
  *
  * @author Rodrigo
@@ -79,8 +82,25 @@ public class Emprestimo{
         return "Livro: " + this.livro + ", Usuario: " + this.usuario + ", Data emprestimo: " + this.dataEmprestimo + " e Data devolucao: " + this.dataDevolucao;
     }
     
-    public Object getDadosEmprestimoUser(){
-        return new DadosEmprestimoUser(1, "10", "10", true);
+    public DadosEmprestimoUser getDadosEmprestimoUser(DateTimeFormatter formatter, Emprestimo emprestimo){
+        return new DadosEmprestimoUser(
+                emprestimo.getID(), 
+                emprestimo.livro.getTitulo(),
+                LocalDate.now().format(formatter),
+                LocalDate.now().plusMonths(1).format(formatter),
+                true
+        );
     }
     
+    @Override
+    public String toString(){
+        return """
+               
+               {ID=""" + this.ID +
+                ", titulo do livro='" + this.livro.getTitulo() + '\'' +
+                ", nome do usuario=" + this.usuario.getNome() +
+                ", data de emprestimo=" + this.dataEmprestimo +
+                ", data de devolucao='" + this.dataDevolucao +
+                "}";
+    }
 }

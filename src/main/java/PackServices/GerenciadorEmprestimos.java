@@ -7,6 +7,7 @@ package PackServices;
 import PackModel.Emprestimo;
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Optional;
 
 /**
  *
@@ -18,6 +19,7 @@ public final class GerenciadorEmprestimos extends ArquivoManager{
     private ArrayList<Emprestimo> listaEmprestimos = new ArrayList<>();
     private ArrayList<Emprestimo> loadedEmprestimos;
     public int ultimoIDEmprestimo = 0;
+    private ArrayList<Emprestimo> resultadoPesquisa  = new ArrayList<>();;
     
     public GerenciadorEmprestimos(){
         super();
@@ -40,5 +42,16 @@ public final class GerenciadorEmprestimos extends ArquivoManager{
     
     public void chamarFechamento(){
         fecharArquivo(listaEmprestimos);
+    }
+    
+    public void devolverLivro(int ID){
+        Optional<Emprestimo> optionalReturn = this.listaEmprestimos.stream()
+                .filter(em -> em.getID() == ID)
+                .findFirst();
+        
+        if(optionalReturn.isPresent()){
+            Emprestimo emprestimoUser = optionalReturn.get();
+            emprestimoUser.setEmprestado(false);
+        }
     }
 }

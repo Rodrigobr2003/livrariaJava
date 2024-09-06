@@ -15,13 +15,21 @@ public class User {
     private String nome;
     private String email;
     private String telefone;
-    private ArrayList<Object> listaEmprestimos;
+    private ArrayList<DadosEmprestimoUser> listaEmprestimos;;
     
     public User(){
-        listaEmprestimos = new ArrayList<>();
+        
     }
     
     public User(String nome, String email, String telefone){
+        this.nome = nome;
+        this.email = email;
+        this.telefone = telefone;
+        this.listaEmprestimos = new ArrayList<>();
+    }
+    
+    public User(int ID, String nome, String email, String telefone){
+        this.ID = ID;
         this.nome = nome;
         this.email = email;
         this.telefone = telefone;
@@ -59,8 +67,14 @@ public class User {
         return this.telefone;
     }
     
-    public void setListaEmprestimos(Object objeto){
+    public void setListaEmprestimos(DadosEmprestimoUser objeto){
+        this.listaEmprestimos = new ArrayList<>();
+        
         this.listaEmprestimos.add(objeto);
+    }
+    
+    public ArrayList<DadosEmprestimoUser> getListaEmprestimos(){
+        return this.listaEmprestimos;
     }
     
     public String getUser(){
@@ -71,9 +85,9 @@ public class User {
     public String toString(){
         return "{" +
                 ", ID =" + this.ID + '\'' +
-                "nome='" + this.nome +
+                ", nome='" + this.nome +
                 ", email=" + this.email +
                 ", telefone=" + this.telefone +
                 '}';
-    }    
+    }
 }
