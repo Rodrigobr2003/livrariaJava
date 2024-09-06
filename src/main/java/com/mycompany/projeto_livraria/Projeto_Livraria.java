@@ -234,7 +234,30 @@ public class Projeto_Livraria {
             gerenciadorLivros.excluirLivro(scanner.nextInt());
         }
         case 7 -> {
-            System.out.println("Historico de Emprestimos");
+            
+            String resultadoUser;
+            User userSelecionado;
+            
+            do{
+                System.out.print("\nEscolha o usuario que deseja verificar o historico");
+                System.out.print("\nPesquisar usuario por nome: ");
+
+                //Resultado da pesquisa do nome do user
+                resultadoUser = gerenciadorUsuarios.pesquisarUser(scanner.next());
+                
+                if(resultadoUser == null || resultadoUser.contains("[]")) System.out.print("\nUsuario nao encontrado...\n");
+                
+            }while(resultadoUser == null  || resultadoUser.contains("[]"));
+                System.out.print("\nResultados: ");
+                System.out.println(resultadoUser);
+                System.out.print("\nEscolha um usuario pelo ID para verificar: ");
+
+                //Aqui aloca dentro da instancia emprestimo o usuario escolhido
+                userSelecionado = gerenciadorUsuarios.pesquisarUser(scanner.nextInt());
+                
+                System.out.print("\nEmprestimos do " + userSelecionado.getNome() + " :");
+                
+                System.out.println("\n" + gerenciadorUsuarios.getHistoricoEmprestimos(userSelecionado));
         }
         case 8 -> {
             
