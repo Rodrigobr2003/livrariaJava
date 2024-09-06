@@ -49,7 +49,10 @@ public final class GerenciadorUsers extends ArquivoManager{
         String varEnvio;
         
         for(User user : listaUsers){
-            if(user.getNome().equals(nome)){
+            String nomeUsuarioTratado = user.getNome().toLowerCase().replace(" ", "");
+            String nomeEnviadoTratado = nome.toLowerCase().replace(" ", "");
+            
+            if(nomeUsuarioTratado.equals(nomeEnviadoTratado)){
                 resultadoPesquisa.add(user);
             }
         }
@@ -114,7 +117,7 @@ public final class GerenciadorUsers extends ArquivoManager{
                 System.out.print("\nPesquisar usuario pelo nome: ");
 
                 //Resultado da pesquisa do nome do user
-                resultadoUser = this.pesquisarUser(scanner.next());
+                resultadoUser = this.pesquisarUser(scanner.nextLine());
                 
                 if(resultadoUser == null || resultadoUser.contains("[]")) System.out.print("\nUsuario nao encontrado...\n");
                 

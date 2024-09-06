@@ -48,7 +48,10 @@ public final class GerenciadorLivros extends ArquivoManager{
         String varEnvio;
         
         for(Livro livro : listaLivros){
-            if(livro.getTitulo().equals(titulo)){
+            String tituloLivroTratado = livro.getTitulo().toLowerCase().replace(" ", "");
+            String tituloEnviadoTratado = titulo.toLowerCase().replace(" ", "");
+            
+            if(tituloLivroTratado.equals(tituloEnviadoTratado)){
                 resultadoPesquisa.add(livro);
             }
         }
@@ -101,7 +104,7 @@ public final class GerenciadorLivros extends ArquivoManager{
                 System.out.print("\nPesquisar livro pelo titulo: ");
 
                 //Resultado da pesquisa do nome do livro
-                resultadoLivro = pesquisarLivro(scanner.next());
+                resultadoLivro = pesquisarLivro(scanner.nextLine());
                 
                 if(resultadoLivro == null  || resultadoLivro.contains("[]")) System.out.print("\nLivro nao encontrado...\n");
                 
